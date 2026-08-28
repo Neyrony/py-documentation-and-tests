@@ -98,7 +98,7 @@ class CinemaHallViewSet(
                 description="Find movie sessions by date",
             ),
             OpenApiParameter(
-                name="movie session",
+                name="movie",
                 type=OpenApiTypes.INT,
                 location=OpenApiParameter.QUERY,
                 required=False,
