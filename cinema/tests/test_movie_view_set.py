@@ -88,7 +88,7 @@ class UserAuthenticatedTest(APITestCase):
         movies = Movie.objects.all()
         movies_serializer = MovieListSerializer(movies, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(res.data["results"], movies_serializer.data)
+        self.assertEqual(res.data, movies_serializer.data)
 
     def test_list_filter(self):
         actor = Actor.objects.create(first_name="Test", last_name="actor")
@@ -105,24 +105,24 @@ class UserAuthenticatedTest(APITestCase):
 
         res = self.client.get(LIST_URL, {"actors": f"{actor.id}"})
 
-        self.assertIn(movie1_serializer.data, res.data["results"])
-        self.assertNotIn(movie2_serializer.data, res.data["results"])
-        self.assertNotIn(movie3_serializer.data, res.data["results"])
-        self.assertEqual(len(res.data["results"]), 1)
+        self.assertIn(movie1_serializer.data, res.data)
+        self.assertNotIn(movie2_serializer.data, res.data)
+        self.assertNotIn(movie3_serializer.data, res.data)
+        self.assertEqual(len(res.data), 1)
 
         res = self.client.get(LIST_URL, {"genres": f"{genre.id}"})
 
-        self.assertNotIn(movie1_serializer.data, res.data["results"])
-        self.assertIn(movie2_serializer.data, res.data["results"])
-        self.assertNotIn(movie3_serializer.data, res.data["results"])
-        self.assertEqual(len(res.data["results"]), 1)
+        self.assertNotIn(movie1_serializer.data, res.data)
+        self.assertIn(movie2_serializer.data, res.data)
+        self.assertNotIn(movie3_serializer.data, res.data)
+        self.assertEqual(len(res.data), 1)
 
         res = self.client.get(LIST_URL, {"title": f"{title}"})
 
-        self.assertNotIn(movie1_serializer.data, res.data["results"])
-        self.assertNotIn(movie2_serializer.data, res.data["results"])
-        self.assertIn(movie3_serializer.data, res.data["results"])
-        self.assertEqual(len(res.data["results"]), 1)
+        self.assertNotIn(movie1_serializer.data, res.data)
+        self.assertNotIn(movie2_serializer.data, res.data)
+        self.assertIn(movie3_serializer.data, res.data)
+        self.assertEqual(len(res.data), 1)
 
     def test_retrieve(self):
         serializer = MovieListSerializer(self.movie1)
