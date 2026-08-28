@@ -16,7 +16,7 @@ router.register("actors", ActorViewSet, basename="actor")
 router.register("cinema_halls", CinemaHallViewSet, basename="cinema_hall")
 router.register("movies", MovieViewSet, basename="movie")
 router.register(
-    "movie_sessions", MovieSessionViewSet, basename="movie_session"
+    "movie_sessions", MovieSessionViewSet, basename="moviesession"
 )
 router.register("orders", OrderViewSet, basename="order")
 
